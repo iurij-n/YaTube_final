@@ -1,6 +1,5 @@
 import shutil
 import tempfile
-from django.http import response
 
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
@@ -9,7 +8,7 @@ from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.cache import cache
 
-from ..models import Comment, Group, Post, User
+from ..models import Group, Post, User
 from .const import (AUTHOR, GROUP_TITLE, GROUP_SLUG,
                     GROUP_DESCRIPTION, POST_TEXT, INDEX_URL
                     )
@@ -27,6 +26,7 @@ TEMPLATES_PAGE_NAMES = [
     REVERSE_GROUP,
     REVERSE_PROFILE,
 ]
+
 
 @override_settings(MEDIA_ROOT=TEMP_MEDIA_ROOT)
 class PostPagesTests(TestCase):
@@ -47,13 +47,13 @@ class PostPagesTests(TestCase):
             slug=slug_2,
             description=description_2,
         )
-        small_gif = (            
-             b'\x47\x49\x46\x38\x39\x61\x02\x00'
-             b'\x01\x00\x80\x00\x00\x00\x00\x00'
-             b'\xFF\xFF\xFF\x21\xF9\x04\x00\x00'
-             b'\x00\x00\x00\x2C\x00\x00\x00\x00'
-             b'\x02\x00\x01\x00\x00\x02\x02\x0C'
-             b'\x0A\x00\x3B'
+        small_gif = (
+            b'\x47\x49\x46\x38\x39\x61\x02\x00'
+            b'\x01\x00\x80\x00\x00\x00\x00\x00'
+            b'\xFF\xFF\xFF\x21\xF9\x04\x00\x00'
+            b'\x00\x00\x00\x2C\x00\x00\x00\x00'
+            b'\x02\x00\x01\x00\x00\x02\x02\x0C'
+            b'\x0A\x00\x3B'
         )
         cls.uploaded = SimpleUploadedFile(
             name='small.gif',
@@ -123,7 +123,7 @@ class PostPagesTests(TestCase):
             image=self.uploaded,
         )
         self.assertTrue(Post.objects.filter(text='post with image').exists(),
-            'Пост с картинкой не попал в базу данных')
+                        'Пост с картинкой не попал в базу данных')
 
     def test_post_detail_page_show_correct_context(self):
         response = self.authorized_client.get(REVERSE_POST_DETAIL)
@@ -173,7 +173,7 @@ class PostPagesTests(TestCase):
         response_2_guest = self.guest_client.get(INDEX_URL)
         self.assertEqual(response_1_authorized.content,
                          response_2_authorized.content,
-                         'Страница отдается не из кэша для '\
+                         'Страница отдается не из кэша для '
                          'авторизованного пользователя')
         self.assertEqual(response_1_guest.content,
                          response_2_guest.content,
@@ -183,12 +183,11 @@ class PostPagesTests(TestCase):
         response_3_guest = self.guest_client.get(INDEX_URL)
         self.assertNotEqual(response_1_authorized.content,
                             response_3_authorized.content,
-                            'Удаленный пост все еще на главной '\
+                            'Удаленный пост все еще на главной '
                             'для авторизованного пользователя')
         self.assertNotEqual(response_1_guest.content,
                             response_3_guest.content,
                             'Страница отдается не из кэша для гостя')
-
 
 
 class PaginatorViewsTest(TestCase):

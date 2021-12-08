@@ -18,9 +18,9 @@ class GroupAdmin(admin.ModelAdmin):
     list_display = ('pk', 'title', 'slug', 'description')
     empty_value_display = EMPTY_VALUE_DISPLAY
 
+
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('author', 'post', 'pub_date')
     search_fields = ('author', 'text_comment')
     empty_value_display = EMPTY_VALUE_DISPLAY
-#admin.site.register(Comment, CommentAdmin)

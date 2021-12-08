@@ -33,7 +33,6 @@ class Post(CreatedModel):
         help_text='Картинка для поста'
     )
 
-
     class Meta:
         ordering = ('-pub_date',)
         verbose_name = 'Пост'
@@ -77,8 +76,8 @@ class Comment(CreatedModel):
         help_text='Выберите автора комментария'
     )
     text_comment = models.TextField('Комментарий',
-                            help_text='Введите комментарий')
-    
+                                    help_text='Введите комментарий')
+
     class Meta:
         ordering = ('-pub_date',)
 

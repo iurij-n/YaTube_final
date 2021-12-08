@@ -41,22 +41,22 @@ class FollowTests(TestCase):
         self.authorized_client.force_login(self.user1)
         self.authorized_client_1 = Client()
         self.authorized_client_1.force_login(self.user3)
-    
+
     def test_create_and_delete_follow(self):
         foll_count_1 = Follow.objects.all().count()
         self.authorized_client.get(
             reverse('posts:profile_follow',
-                    kwargs={'username': self.user2.username,}))
+                    kwargs={'username': self.user2.username, }))
         foll_count_2 = Follow.objects.all().count()
-        self.assertEqual(foll_count_2, foll_count_1+1, 'Запись в таблице '
+        self.assertEqual(foll_count_2, foll_count_1 + 1, 'Запись в таблице '
                                                        'подписок не создана')
         self.authorized_client.get(
             reverse('posts:profile_unfollow',
-                    kwargs={'username': self.user2.username,}))
+                    kwargs={'username': self.user2.username, }))
         foll_count_2 = Follow.objects.all().count()
         self.assertEqual(foll_count_2, foll_count_1, 'Запись в таблице '
                                                      'подписок не удалена')
-    
+
     def test_post_in_feed(self):
         Follow.objects.create(
             user=self.user1,
@@ -72,4 +72,4 @@ class FollowTests(TestCase):
                       'Пост не выводится в ленту подписчика')
         response = self.authorized_client_1.get(reverse('posts:follow_index'))
         self.assertNotIn('test_text_42', str(response.content),
-                      'Пост выводится в ленту неподписчика')
+                         'Пост выводится в ленту неподписчика')
