@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load cache %}
+{% cache 20 index_page page_number %}
+{% include 'posts/includes/switcher.html' %}
+  {% for post in page_obj %}
+    {% include 'posts/includes/post_list.html' %}  
+    {% if post.group is not Null %}
+      <a href="{% url 'posts:group_posts' post.group.get_slug %}">
+        все записи группы
+      </a>
+    {% endif %}
+    {% if not forloop.last %}<hr>{% endif %}
+  {% endfor %}
+{% endcache %}
+{% include 'posts/includes/paginator.html' %}
+{% endblock %}
