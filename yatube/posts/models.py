@@ -75,8 +75,8 @@ class Comment(CreatedModel):
         related_name='comments',
         help_text='Выберите автора комментария'
     )
-    text_comment = models.TextField('Комментарий',
-                                    help_text='Введите комментарий')
+    text = models.TextField('Комментарий',
+                            help_text='Введите комментарий')
 
     class Meta:
         ordering = ('-pub_date',)
