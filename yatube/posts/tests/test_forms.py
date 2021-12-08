@@ -32,7 +32,7 @@ class PostPagesTests(TestCase):
         cls.comment = Comment.objects.create(
             post=cls.post,
             author=cls.user,
-            text_comment='Тестовый комментарий'
+            text='Тестовый комментарий'
         )
 
     @classmethod
@@ -87,7 +87,7 @@ class PostPagesTests(TestCase):
     def test_guest_comment_not_create(self):
         comment_count = Comment.objects.count()
         form_data = {
-            'text_comment': 'Новый тестовый комментарий',
+            'text': 'Новый тестовый комментарий',
         }
         self.guest_client.post(
             reverse('posts:add_comment', kwargs={'post_id': '1'}),
@@ -98,7 +98,7 @@ class PostPagesTests(TestCase):
 
     def test_comment_create_and_post(self):
         form_data = {
-            'text_comment': 'Новый тестовый комментарий',
+            'text': 'Новый тестовый комментарий',
         }
         self.authorized_client.post(
             reverse('posts:add_comment', kwargs={'post_id': '1'}),
@@ -108,5 +108,5 @@ class PostPagesTests(TestCase):
         response = self.authorized_client.get(
             reverse('posts:post_detail', kwargs={'post_id': '1'}))
         first_comment = response.context['comments'][0]
-        self.assertEqual(first_comment.text_comment,
+        self.assertEqual(first_comment.text,
                          'Новый тестовый комментарий')
