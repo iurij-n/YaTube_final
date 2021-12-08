@@ -48,8 +48,9 @@ class FollowTests(TestCase):
             reverse('posts:profile_follow',
                     kwargs={'username': self.user2.username, }))
         foll_count_2 = Follow.objects.all().count()
-        self.assertEqual(foll_count_2, foll_count_1 + 1, 'Запись в таблице '
-                                                       'подписок не создана')
+        self.assertEqual(foll_count_2,
+                         foll_count_1 + 1, 'Запись в таблице '
+                                           'подписок не создана')
         self.authorized_client.get(
             reverse('posts:profile_unfollow',
                     kwargs={'username': self.user2.username, }))

@@ -113,6 +113,7 @@ def post_create(request):
         return redirect('posts:profile', request.user)
     return render(request, template, context)
 
+
 def post_edit(request, post_id):
     if request.method == 'GET':
         post = get_object_or_404(Post, pk=post_id)
@@ -172,8 +173,8 @@ def follow_index(request):
 @login_required
 def profile_follow(request, username):
     author = get_object_or_404(User, username=username)
-    if not Follow.objects.filter(user=request.user, author=author).exists() \
-        and author != request.user:
+    if not Follow.objects.filter(user=request.user, author=author).exists() and \
+        author != request.user:
         Follow.objects.create(
             user=request.user,
             author=author)
