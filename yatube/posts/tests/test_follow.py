@@ -1,11 +1,9 @@
+from django.core.cache import cache
 from django.test import Client, TestCase
 from django.urls import reverse
-from django.core.cache import cache
 
 from ..models import Follow, Group, Post, User
-from .const import (GROUP_TITLE, GROUP_SLUG,
-                    GROUP_DESCRIPTION, POST_TEXT
-                    )
+from .const import GROUP_DESCRIPTION, GROUP_SLUG, GROUP_TITLE, POST_TEXT
 
 
 class FollowTests(TestCase):

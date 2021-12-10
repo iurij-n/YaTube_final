@@ -1,7 +1,7 @@
+from core.models import CreatedModel
 from django.contrib.auth import get_user_model
 from django.db import models
-
-from core.models import CreatedModel
+from django.db.models import Q, F
 
 User = get_user_model()
 
@@ -93,7 +93,7 @@ class Follow(models.Model):
         verbose_name='Подписчик',
         on_delete=models.CASCADE,
         related_name='follower',
-        help_text='Имя подписчика'
+        help_text='Имяподписчика'
     )
     author = models.ForeignKey(
         User,
@@ -102,3 +102,10 @@ class Follow(models.Model):
         related_name='following',
         help_text='Имя автора публикаций'
     )
+
+    # class Meta:
+    #     constraints = [
+    #         models.UniqueConstraint(fields=['user', 'author'], name='unique_follow'),
+    #     ]
+
+

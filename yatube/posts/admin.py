@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from yatube.settings import EMPTY_VALUE_DISPLAY
+
 from .models import Comment, Group, Post
 
 

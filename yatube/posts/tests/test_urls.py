@@ -1,12 +1,11 @@
 from http import HTTPStatus
 
-from django.test import TestCase, Client
+from django.test import Client, TestCase
 
 from ..models import Group, Post, User
-from .const import (AUTHOR, GROUP_TITLE, GROUP_SLUG, GROUP_DESCRIPTION,
-                    POST_TEXT, INDEX_URL, ABOUT_TECH_URL, GROUP_URL,
-                    PROFILE_URL, CREATE_URL, POST_URL, EDIT_URL
-                    )
+from .const import (ABOUT_TECH_URL, AUTHOR, CREATE_URL, EDIT_URL,
+                    GROUP_DESCRIPTION, GROUP_SLUG, GROUP_TITLE, GROUP_URL,
+                    INDEX_URL, POST_TEXT, POST_URL, PROFILE_URL)
 
 
 class PostURLTest(TestCase):

@@ -1,7 +1,7 @@
-from django.urls import reverse_lazy
-from django.views.generic import CreateView
 from django.contrib.auth.views import LogoutView
 from django.core.cache import cache
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
 
 from .forms import CreationForm
 

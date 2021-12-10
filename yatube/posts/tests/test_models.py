@@ -1,9 +1,8 @@
 from django.test import TestCase
 
 from ..models import Group, Post, User
-from .const import (AUTHOR, GROUP_TITLE, GROUP_SLUG,
-                    GROUP_DESCRIPTION, POST_TEXT
-                    )
+from .const import (AUTHOR, GROUP_DESCRIPTION, GROUP_SLUG, GROUP_TITLE,
+                    POST_TEXT)
 
 
 class PostModelTest(TestCase):
