@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from yatube.settings import EMPTY_VALUE_DISPLAY
 
-from .models import Comment, Group, Post
+from .models import Comment, Follow, Group, Post
 
 
 @admin.register(Post)
@@ -24,4 +24,11 @@ class GroupAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('author', 'post', 'pub_date')
     search_fields = ('author', 'text_comment')
+    empty_value_display = EMPTY_VALUE_DISPLAY
+
+
+@admin.register(Follow)
+class FollowAdmin(admin.ModelAdmin):
+    list_display = ('user', 'author')
+    search_fields = ('user', 'author')
     empty_value_display = EMPTY_VALUE_DISPLAY

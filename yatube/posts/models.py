@@ -103,10 +103,12 @@ class Follow(models.Model):
         help_text='Имя автора публикаций'
     )
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['user', 'author'], name='unique_follow'),
-            models.CheckConstraint(check=~Q(user=F('author')), name='subscribe_to_yourself'),
-        ]
+    # class Meta:
+    #     constraints = [
+    #         models.UniqueConstraint(fields=['user', 'author'],
+    #                                 name='unique_follow'),
+    #         models.CheckConstraint(check=~Q(author__username=F('user__username')),
+    #                                name='subscribe_to_yourself'),
+    #     ]
 
 

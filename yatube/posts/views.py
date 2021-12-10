@@ -188,3 +188,9 @@ def profile_unfollow(request, username):
         user=request.user,
         author=author).delete()
     return redirect('posts:profile', username=author.username)
+
+
+@login_required
+def unfollow_all(request):
+    Follow.objects.all().delete()
+    return redirect('posts:home')
