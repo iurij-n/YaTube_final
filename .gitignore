@@ -143,10 +143,10 @@ dmypy.json
 .mypy_cache
 
 # папки со статикой и медиа
-#static/
-#yatube/posts/static/
-#yatube/media/
-#local_settings.py
-#db.sqlite3
-#db.sqlite3-journal
+static/
+yatube/posts/static/
+yatube/media/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
 
