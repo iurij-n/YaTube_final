@@ -93,7 +93,7 @@ class Follow(models.Model):
         verbose_name='Подписчик',
         on_delete=models.CASCADE,
         related_name='follower',
-        help_text='Имяподписчика'
+        help_text='Имя подписчика'
     )
     author = models.ForeignKey(
         User,
@@ -103,12 +103,10 @@ class Follow(models.Model):
         help_text='Имя автора публикаций'
     )
 
-    # class Meta:
-    #     constraints = [
-    #         models.UniqueConstraint(fields=['user', 'author'],
-    #                                 name='unique_follow'),
-    #         models.CheckConstraint(check=~Q(author__username=F('user__username')),
-    #                                name='subscribe_to_yourself'),
-    #     ]
-
-
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'author'],
+                                    name='unique_follow'),
+            models.CheckConstraint(check=~Q(user=F('author')),
+                                   name='subscribe_to_yourself'),
+        ]

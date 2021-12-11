@@ -45,7 +45,6 @@ User = get_user_model()
 def profile(request, username):
     template = 'posts/profile.html'
     user = User.objects.get(username=username)
-    user_fn = user.first_name + ' ' + user.last_name
     posts = Post.objects.filter(author=user)
     paginator = Paginator(posts, settings.POST_PER_PAGE)
     page_number = request.GET.get('page')
@@ -62,7 +61,6 @@ def profile(request, username):
             'title': title,
             'posts': posts,
             'author': user,
-            'user_fn': user_fn,
             'current_user': current_user.username,
             'following': following,
         }
@@ -72,7 +70,6 @@ def profile(request, username):
             'title': title,
             'posts': posts,
             'author': user,
-            'user': user_fn,
         }
     return render(request, template, context)
 
@@ -156,8 +153,8 @@ def add_comment(request, post_id):
 
 @login_required
 def follow_index(request):
-    list_author = [a.author for a in Follow.objects.filter(user=request.user)]
-    feed = Post.objects.filter(author__in=list_author).order_by('-pub_date')
+    feed = Post.objects.filter(
+        author__following__user=request.user).order_by('-pub_date')
     paginator = Paginator(feed, settings.POST_PER_PAGE)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
