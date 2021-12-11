@@ -51,7 +51,6 @@ def profile(request, username):
     page_obj = paginator.get_page(page_number)
     title = f'{username} профайл пользователя'
     if request.user.username:
-        current_user = request.user
         if Follow.objects.filter(user=request.user, author=user).exists():
             following = True
         else:
@@ -60,8 +59,6 @@ def profile(request, username):
             'page_obj': page_obj,
             'title': title,
             'posts': posts,
-            'author': user,
-            'current_user': current_user.username,
             'following': following,
         }
     else:
@@ -69,7 +66,6 @@ def profile(request, username):
             'page_obj': page_obj,
             'title': title,
             'posts': posts,
-            'author': user,
         }
     return render(request, template, context)
 

@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h1>Все посты пользователя {{ author.get_full_name }} {{ author }}</h1>
+{% with page_obj.0 as one_post %}
+<h1>Все посты пользователя {{ one_post.author.get_full_name }} {{ one_post.author.username }}</h1>
+
   <h3>Всего постов: {{ posts|length }}</h3>
   {% if user.is_authenticated %}
-    {% if author.username != current_user %}
+    {% if one_post.author != request.user %}
       {% if following %}
         <a class="btn btn-lg btn-light"
-        href="{% url 'posts:profile_unfollow' author.username %}" role="button">
+        href="{% url 'posts:profile_unfollow' one_post.author.username %}" role="button">
           Отписаться
         </a>
       {% else %}
         <a class="btn btn-lg btn-primary"
-        href="{% url 'posts:profile_follow' author.username %}" role="button">
+        href="{% url 'posts:profile_follow' one_post.author.username %}" role="button">
           Подписаться
         </a>
       {% endif %}
@@ -27,4 +29,5 @@
     {% if not forloop.last %}<hr>{% endif %}
   {% endfor %}
   {% include 'posts/includes/paginator.html' %}
+{% endwith %}
 {% endblock %}
