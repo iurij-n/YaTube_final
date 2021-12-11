@@ -66,6 +66,7 @@ def profile(request, username):
             'page_obj': page_obj,
             'title': title,
             'posts': posts,
+            'author': user,
         }
     return render(request, template, context)
 
