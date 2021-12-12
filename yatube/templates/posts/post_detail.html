@@ -2,6 +2,7 @@
 {% block content %}
 {% load thumbnail %}
 {% load user_filters %}
+{% with post.comments.all as comments %}
 <main>
   <div class="container py-5">
     <div class="row">
@@ -72,4 +73,5 @@
     </div>     
   </div>
 </main>
+{% endwith %}
 {% endblock %}

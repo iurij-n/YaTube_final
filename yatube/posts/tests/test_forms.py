@@ -91,7 +91,7 @@ class PostPagesTests(TestCase):
 
     def test_comment_create_and_post(self):
         form_data = {
-            'text': 'Новый тестовый комментарий',
+            'text': 'New text comment',
         }
         self.authorized_client.post(
             reverse('posts:add_comment', kwargs={'post_id': '1'}),
@@ -100,6 +100,4 @@ class PostPagesTests(TestCase):
         )
         response = self.authorized_client.get(
             reverse('posts:post_detail', kwargs={'post_id': '1'}))
-        first_comment = response.context['comments'][0]
-        self.assertEqual(first_comment.text,
-                         'Новый тестовый комментарий')
+        self.assertIn('New text comment', str(response.content))

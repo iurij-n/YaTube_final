@@ -78,14 +78,12 @@ def post_detail(request, post_id):
     posts = Post.objects.filter(author=current_user)
     title = f'Пост {post.text[:30]}'
     comment_form = CommentForm(request.POST or None)
-    comments = post.comments.all()
     context = {
         'post': post,
         'title': title,
         'posts': posts,
         'user': request.user,
         'comment_form': comment_form,
-        'comments': comments,
     }
     return render(request, template, context)
 
@@ -151,7 +149,7 @@ def add_comment(request, post_id):
 @login_required
 def follow_index(request):
     feed = Post.objects.filter(
-        author__following__user=request.user).order_by('-pub_date')
+        author__following__user=request.user)
     paginator = Paginator(feed, settings.POST_PER_PAGE)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -167,8 +165,8 @@ def follow_index(request):
 def profile_follow(request, username):
     author = get_object_or_404(User, username=username)
     if not Follow.objects.filter(
-        user=request.user, author=author).exists() and \
-            author != request.user:
+            user=request.user,
+            author=author).exists() and author != request.user:
         Follow.objects.create(
             user=request.user,
             author=author)
