@@ -4,9 +4,7 @@
   <p>{{ group.description|linebreaks }}</p>
   {% for post in page_obj %}
     {% include 'posts/includes/post_list.html' %}
-    {% if not forloop.last %}
-      <hr>
-    {% endif %}
+    {% if not forloop.last %}<hr style="clear: both;">{% endif %}
   {% endfor %}
   {% include 'posts/includes/paginator.html' %}
 {% endblock %}
