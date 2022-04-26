@@ -7,6 +7,13 @@ SECRET_KEY = 'okdd2!0ks1k5q!*@29q(3tnl#ftr_g4zo@8+)t%x*2+g=a^j!6'
 
 DEBUG = True
 
+# ALLOWED_HOSTS = [
+#     'www.xboxer3003.pythonanywhere.com',
+#     'xboxer3003.pythonanywhere.com',
+# ]
+
+
+
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
@@ -28,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sorl.thumbnail',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -38,6 +46,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'yatube.urls'
@@ -120,3 +129,7 @@ CACHES = {
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
 )
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
