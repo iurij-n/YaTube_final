@@ -10,7 +10,9 @@
         все записи группы
       </a>
     {% endif %}
-    {% if not forloop.last %}<hr>{% endif %}
+    
+    {% if not forloop.last %}<hr style="clear: both;">{% endif %}
+    
   {% endfor %}
 {% endcache %}
 {% include 'posts/includes/paginator.html' %}
