@@ -6,12 +6,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'okdd2!0ks1k5q!*@29q(3tnl#ftr_g4zo@8+)t%x*2+g=a^j!6'
 
 DEBUG = True
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # ALLOWED_HOSTS = [
 #     'www.xboxer3003.pythonanywhere.com',
 #     'xboxer3003.pythonanywhere.com',
 # ]
-
 
 
 ALLOWED_HOSTS = [
